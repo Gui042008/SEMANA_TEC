@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Sim ou Não</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #ffe4e1;
+      color: #d63384;
+    }
+
+    .question-screen {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      padding: 40px;
+      box-sizing: border-box;
+      background-color: #ffe4e1;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .question-screen.active {
+      display: flex;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #d63384;
+    }
+
+    .options button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      background-color: #ffc0cb;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      transition: transform 0.2s ease;
+    }
+
+    .options button:hover {
+      transform: scale(1.05);
+      background-color: #ffb6c1;
+    }
+
+    #tricky-no {
+      position: absolute;
+    }
+
+    #jumpscare {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #jumpscare video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="quiz">
+    <!-- Perguntas 1 a 9 -->
+    <div class="question-screen active">
+      <h2>1. Você já visitou outro país?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>2. Você gosta de comida picante?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>3. Você já praticou algum esporte regularmente?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>4. Você sabe nadar?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>5. Você já leu um livro inteiro este ano?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>6. Você gosta de filmes de terror?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>7. Você já fez trabalho voluntário?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>8. Você tem medo de altura?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <div class="question-screen">
+      <h2>9. Você já aprendeu outro idioma além do português?</h2>
+      <div class="options">
+        <button onclick="nextQuestion()">Sim</button>
+        <button onclick="nextQuestion()">Não</button>
+      </div>
+    </div>
+
+    <!-- Pergunta 10 com jumpscare -->
+    <div class="question-screen" style="position: relative;">
+      <h2>10. Você prefere café ao invés de chá?</h2>
+      <div class="options">
+        <button onclick="showJumpscare()">Sim</button>
+        <button id="tricky-no" onclick="endQuiz()">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jumpscare -->
+  <div id="jumpscare">
+    <video id="jumpscare-video" autoplay muted playsinline>
+      <source src="jumpscare3.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+  <script>
+    let current = 0;
+    const screens = document.querySelectorAll('.question-screen');
+
+    function nextQuestion() {
+      screens[current].classList.remove('active');
+      current++;
+      if (screens[current]) {
+        screens[current].classList.add('active');
+      }
+    }
+
+    function endQuiz() {
+      screens[current].classList.remove('active');
+      alert("Obrigado por participar do quiz!");
+    }
+
+    function showJumpscare() {
+      const jumpscare = document.getElementById('jumpscare');
+      const jumpscareVideo = document.getElementById('jumpscare-video');
+      jumpscare.style.display = 'flex';
+      jumpscareVideo.currentTime = 0;  // reinicia o vídeo do começo
+      jumpscareVideo.play().catch(() => {
+        console.log("Autoplay bloqueado. Clique para ativar o som.");
+      });
+
+      // Efeito de piscar
+      let flashes = 0;
+      const flashInterval = setInterval(() => {
+        jumpscare.style.backgroundColor = flashes % 2 === 0 ? 'black' : 'red';
+        flashes++;
+        if (flashes > 5) clearInterval(flashInterval);
+      }, 200);
+
+      setTimeout(() => {
+        jumpscare.style.display = 'none';
+        endQuiz();
+      }, 3000);
+    }
+
+    const noButton = document.getElementById('tricky-no');
+    noButton.addEventListener('mouseenter', () => {
+      const container = noButton.parentElement.parentElement;
+      const containerWidth = container.offsetWidth;
+      const containerHeight = container.offsetHeight;
+
+      const newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
+      const newTop = Math.random() * (containerHeight - noButton.offsetHeight);
+
+      noButton.style.left = `${newLeft}px`;
+      noButton.style.top = `${newTop}px`;
+    });
+  </script>
+</body>
+</html>
+  
