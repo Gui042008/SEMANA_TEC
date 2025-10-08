@@ -19,7 +19,7 @@ Usamos partes básicas para criar um site simples, como montar um quebra-cabeça
  Execução do projeto: 
  
     Copie o código HTML e salve como quiz.html no computador (use Bloco de Notas).
-    Baixe um vídeo curto chamado jumpscare3.mp4 (de sites grátis como Pexels) e coloque na mesma pasta (opcional).
+    Baixe um vídeo curto chamado jumpscare3.mp4  e coloque na mesma pasta (opcional).
     Abra o arquivo no navegador (Chrome ou outro) clicando duas vezes. O quiz começa!
     Não precisa baixar apps extras. Funciona offline (exceto imagens online opcionais).
     No celular: Envie o arquivo e abra no navegador.
