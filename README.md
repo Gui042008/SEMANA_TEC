@@ -6,7 +6,7 @@ Logica de funcionamento
 
 O quiz apresenta 10 perguntas de "Sim ou Não" em sequência, como virar páginas de um livro. Cada clique em "Sim" ou "Não" avança para a próxima. O sistema lembra respostas anteriores para personalizar o final. O botão "Não" na última pergunta se move ao aproximar o mouse, adicionando diversão. Termina com uma mensagem de agradecimento, como um amigo brincalhão!
 
-Linguagens e ferramentas
+Linguagens e ferramentas:
 
 Usamos partes básicas para criar um site simples, como montar um quebra-cabeça:
 
